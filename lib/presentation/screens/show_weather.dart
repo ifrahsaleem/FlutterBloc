@@ -4,11 +4,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weatherapp/bloc/weather/weather_bloc.dart';
 import 'package:weatherapp/bloc/weather/weather_event.dart';
+import 'package:weatherapp/data/models/weather_model.dart';
 
-class ShowWeather extends StatelessWidget {
+class ShowWeather extends StatefulWidget {
   final List argArray;
 
   const ShowWeather(this.argArray, {Key? key}) : super(key: key);
+
+  @override
+  State<ShowWeather> createState() => _ShowWeatherState(argArray);
+}
+
+class _ShowWeatherState extends State<ShowWeather> {
+  WeatherModel weather = WeatherModel(0, 0, 0, 0, 0);
+  List argArray = [];
+
+  _ShowWeatherState(this.argArray);
+  @override
+  void initState() {
+    if (argArray[1] is WeatherModel) {
+      weather = argArray[1];
+      print('here');
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +46,7 @@ class ShowWeather extends StatelessWidget {
               height: 10,
             ),
             Text(
-              argArray[1].getTemp.round().toString() + "°C",
+              weather.getTemp.round().toString() + "°C",
               style: TextStyle(color: Colors.grey, fontSize: 50),
             ),
             Text(
@@ -40,7 +59,7 @@ class ShowWeather extends StatelessWidget {
                 Column(
                   children: <Widget>[
                     Text(
-                      argArray[1].getMinTemp.round().toString() + "°C",
+                      weather.getMinTemp.round().toString() + "°C",
                       style: TextStyle(color: Colors.grey, fontSize: 30),
                     ),
                     Text(
@@ -52,7 +71,7 @@ class ShowWeather extends StatelessWidget {
                 Column(
                   children: <Widget>[
                     Text(
-                      argArray[1].getMaxTemp.round().toString() + "°C",
+                      weather.getMaxTemp.round().toString() + "°C",
                       style: TextStyle(color: Colors.grey, fontSize: 30),
                     ),
                     Text(

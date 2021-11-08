@@ -8,7 +8,6 @@ import 'package:weatherapp/bloc/weather/weather_bloc.dart';
 import 'package:weatherapp/bloc/weather/weather_event.dart';
 import 'package:weatherapp/bloc/weather/weather_state.dart';
 import 'package:weatherapp/constants/constants.dart';
-import 'package:weatherapp/presentation/screens/internet_connection.dart';
 import 'package:weatherapp/presentation/screens/settings_page.dart';
 import 'package:weatherapp/presentation/screens/show_weather.dart';
 

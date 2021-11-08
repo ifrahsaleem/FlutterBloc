@@ -10,7 +10,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 
   WeatherBloc(this.weatherRepo) : super(WeatherIsNotSearched());
   // {
-  //   //on<FetchWeather>((event, emit) => emit());
+  //on<FetchWeather>((event, emit) => emit());
   //   on<ResetWeather>((event, emit) => emit(WeatherIsNotSearched()));
   // }
 

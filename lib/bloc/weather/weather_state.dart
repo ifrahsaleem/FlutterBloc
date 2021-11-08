@@ -10,7 +10,7 @@ class WeatherIsNotSearched extends WeatherState {}
 
 class WeatherIsLoading extends WeatherState {}
 
-class NoNetwork extends WeatherState {}
+//class NoNetwork extends WeatherState {}
 
 class WeatherIsLoaded extends WeatherState {
   final WeatherModel _weather;

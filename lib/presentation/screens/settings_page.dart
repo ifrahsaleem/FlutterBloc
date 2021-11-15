@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weatherapp/bloc/theme/theme_cubit.dart';
 import 'package:weatherapp/bloc/theme/theme_state.dart';
+import 'package:weatherapp/locator/locator.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -21,10 +22,10 @@ class SettingsPage extends StatelessWidget {
                   'Switch between light and dark mode.',
                 ),
                 trailing: Switch(
-                  value: state.isDarkThemeEnabled,
-                  onChanged: (_) =>
-                      {BlocProvider.of<ThemeCubit>(context).toggleMode()},
-                ),
+                    value: state.isDarkThemeEnabled,
+                    onChanged: (_) => locator.get<ThemeCubit>().toggleMode()
+                    //{BlocProvider.of<ThemeCubit>(context).toggleMode()},
+                    ),
                 onTap: () {
                   Navigator.pop(context);
                 },

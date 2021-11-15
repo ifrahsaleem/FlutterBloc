@@ -8,8 +8,8 @@ import 'package:weatherapp/bloc/internet/internet_event.dart';
 import 'package:weatherapp/bloc/theme/theme_cubit.dart';
 import 'package:weatherapp/bloc/theme/theme_state.dart';
 import 'package:weatherapp/constants/theme.dart';
+import 'package:weatherapp/locator/locator.dart';
 import 'package:weatherapp/presentation/router/app_router.dart';
-import 'package:weatherapp/repository/weather_repository.dart';
 import 'package:weatherapp/utility/app_bloc_observer.dart';
 import 'bloc/weather/weather_bloc.dart';
 
@@ -21,13 +21,13 @@ Future<void> main() async {
   );
 
   Bloc.observer = AppBlocObserver();
-
+  setup();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   final AppRouter _appRouter = AppRouter();
-  static WeatherRepo weatherRepo = WeatherRepo();
+  //static WeatherRepo weatherRepo = WeatherRepo();
 
   MyApp({Key? key}) : super(key: key);
   // This widget is the root of your application.
@@ -36,13 +36,14 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<InternetBloc>(
-          create: (context) => InternetBloc()..add(ListenConnectionEvent()),
+          create: (context) =>
+              locator<InternetBloc>()..add(ListenConnectionEvent()),
         ),
         BlocProvider<ThemeCubit>(
-          create: (context) => ThemeCubit(),
+          create: (context) => locator<ThemeCubit>(),
         ),
         BlocProvider<WeatherBloc>(
-          create: (context) => WeatherBloc(weatherRepo),
+          create: (context) => locator<WeatherBloc>(),
         )
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(

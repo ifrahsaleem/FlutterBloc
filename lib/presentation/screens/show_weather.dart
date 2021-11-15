@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weatherapp/bloc/weather/weather_bloc.dart';
 import 'package:weatherapp/bloc/weather/weather_event.dart';
 import 'package:weatherapp/data/models/weather_model.dart';
+import 'package:weatherapp/locator/locator.dart';
 
 class ShowWeather extends StatefulWidget {
   final List argArray;
@@ -24,8 +24,8 @@ class _ShowWeatherState extends State<ShowWeather> {
   void initState() {
     if (argArray[1] is WeatherModel) {
       weather = argArray[1];
-      print('here');
     }
+    print('here');
     super.initState();
   }
 
@@ -92,7 +92,8 @@ class _ShowWeatherState extends State<ShowWeather> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 onPressed: () {
-                  BlocProvider.of<WeatherBloc>(context).add(ResetWeather(""));
+                  locator.get<WeatherBloc>().add(ResetWeather(""));
+                  //BlocProvider.of<WeatherBloc>(context).add(ResetWeather(""));
                 },
                 color: Colors.red,
                 child: Text(

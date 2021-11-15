@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:injectable/injectable.dart';
 import 'package:weatherapp/bloc/internet/internet_event.dart';
 import 'package:weatherapp/bloc/internet/internet_state.dart';
 import 'package:weatherapp/constants/enums.dart';
 
+@singleton
 class InternetBloc extends Bloc<InternetEvent, InternetState> {
   StreamSubscription? _subscription;
 

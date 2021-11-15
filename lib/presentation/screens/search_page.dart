@@ -8,6 +8,7 @@ import 'package:weatherapp/bloc/weather/weather_bloc.dart';
 import 'package:weatherapp/bloc/weather/weather_event.dart';
 import 'package:weatherapp/bloc/weather/weather_state.dart';
 import 'package:weatherapp/constants/constants.dart';
+import 'package:weatherapp/locator/locator.dart';
 import 'package:weatherapp/presentation/screens/settings_page.dart';
 import 'package:weatherapp/presentation/screens/show_weather.dart';
 
@@ -17,7 +18,6 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cityController = TextEditingController();
-    final weatherBloc = BlocProvider.of<WeatherBloc>(context);
 
     return BlocListener<InternetBloc, InternetState>(
       listener: (context, state) {
@@ -116,8 +116,11 @@ class SearchPage extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10))),
                             onPressed: () {
-                              weatherBloc
+                              locator
+                                  .get<WeatherBloc>()
                                   .add(FetchWeather(cityController.text));
+                              // weatherBloc
+                              //     .add(FetchWeather(cityController.text));
                             },
                             color: Colors.red,
                             child: Text(
@@ -133,6 +136,7 @@ class SearchPage extends StatelessWidget {
                 } else if (state is WeatherIsLoading) {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is WeatherIsLoaded) {
+                  print('in this state');
                   return ShowWeather([cityController.text, state.getWeather]);
                 }
                 return Column(
@@ -152,8 +156,9 @@ class SearchPage extends StatelessWidget {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
                         onPressed: () {
-                          BlocProvider.of<WeatherBloc>(context)
-                              .add(ResetWeather(""));
+                          locator.get<WeatherBloc>().add(ResetWeather(""));
+                          // BlocProvider.of<WeatherBloc>(context)
+                          //     .add(ResetWeather(""));
                         },
                         color: Colors.red,
                         child: Text(

@@ -1,18 +1,16 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:weatherapp/bloc/weather/weather_event.dart';
 import 'package:weatherapp/bloc/weather/weather_state.dart';
 import 'package:weatherapp/data/models/weather_model.dart';
 import 'package:weatherapp/repository/weather_repository.dart';
 import 'dart:async';
 
+@singleton
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   WeatherRepo weatherRepo = WeatherRepo();
 
-  WeatherBloc(this.weatherRepo) : super(WeatherIsNotSearched());
-  // {
-  //on<FetchWeather>((event, emit) => emit());
-  //   on<ResetWeather>((event, emit) => emit(WeatherIsNotSearched()));
-  // }
+  WeatherBloc() : super(WeatherIsNotSearched());
 
   WeatherState get initialState => WeatherIsNotSearched();
 
